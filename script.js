@@ -2,6 +2,7 @@ const increaseButtonE1 = document.querySelector(".counter_button--increase");
 //console.log(increaseButtonE1);
 const decreaseButtonE1 = document.querySelector(".counter_button--decrease");
 const counterValueE1 = document.querySelector(".counter_value");
+const resetButtonE1 = document.querySelector(".counter_reset-button");
 
 increaseButtonE1.addEventListener("click", function () {
   //console.log('hi');
@@ -19,4 +20,20 @@ decreaseButtonE1.addEventListener("click", function () {
   const currentValueAsNumber = +currentValue;
   const newValue = currentValueAsNumber - 1;
   counterValueE1.textContent = newValue;
+});
+
+resetButtonE1.addEventListener("click", function () {
+  counterValueE1.textContent = 0;
+});
+
+document.addEventListener("keydown", function (e) {
+  const hoveredButton =
+    document.querySelector(".counter_button:hover") ||
+    document.querySelector(".counter_reset-button:hover");
+
+  if (hoveredButton) {
+    hoveredButton.click();
+  } else {
+    increaseButtonE1.click();
+  }
 });
