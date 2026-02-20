@@ -4,36 +4,37 @@ const decreaseButtonE1 = document.querySelector(".counter_button--decrease");
 const counterValueE1 = document.querySelector(".counter_value");
 const resetButtonE1 = document.querySelector(".counter_reset-button");
 
-increaseButtonE1.addEventListener("click", function () {
-  //console.log('hi');
-  //console.log(2);
+function incrementCounter() {
   const currentValue = counterValueE1.textContent;
-  const currentValueAsNumber = +currentValue;
-  const newValue = currentValueAsNumber + 1;
+  let currentValueAsNumber = +currentValue;
+  let newValue = currentValueAsNumber + 1;
+  if (newValue !== 0 && newValue % 100 == 0) {
+    alert("Good Job!");
+  }
   counterValueE1.textContent = newValue;
-});
+}
 
-decreaseButtonE1.addEventListener("click", function () {
-  //console.log('hi');
-  //console.log(2);
+function decreaseCounter() {
   const currentValue = counterValueE1.textContent;
-  const currentValueAsNumber = +currentValue;
-  const newValue = currentValueAsNumber - 1;
+  let currentValueAsNumber = +currentValue;
+  let newValue = currentValueAsNumber - 1;
+  if (newValue < 0) {
+    newValue = 0;
+  }
   counterValueE1.textContent = newValue;
-});
+}
+
+increaseButtonE1.addEventListener("click", incrementCounter);
+decreaseButtonE1.addEventListener("click", decreaseCounter);
 
 resetButtonE1.addEventListener("click", function () {
   counterValueE1.textContent = 0;
 });
 
-document.addEventListener("keydown", function (e) {
-  const hoveredButton =
-    document.querySelector(".counter_button:hover") ||
-    document.querySelector(".counter_reset-button:hover");
+document.addEventListener("keydown", (e) => {
+  const hoveredButton = document.querySelector(
+    ".counter_button:hover, .counter_reset-button:hover",
+  );
 
-  if (hoveredButton) {
-    hoveredButton.click();
-  } else {
-    increaseButtonE1.click();
-  }
+  (hoveredButton || increaseButtonE1).click();
 });
